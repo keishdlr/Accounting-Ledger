@@ -1,14 +1,59 @@
 package com.pluralsight.Capstone;
 
-public class Transaction {
+import java.time.LocalDate;
+import java.time.LocalTime;
 
-    //✅ Transaction Class
-    //Purpose: Represents a single transaction
-    //Contains:
-    //- Fields: date, time, description, vendor, amount
+public class Transaction {
+    //Purpose of this class: Represents a single transaction
+
+    // Characteristics of every transaction
+    // Contains: Fields: date, time, description, vendor, amount
+    private LocalDate date;
+
+    private LocalTime time;
+
+    private String description;
+
+    private String vendor;
+
+    private double amount;
+
+
     //- Constructor
-    //- Methods like:
+
+    public Transaction(LocalDate date, LocalTime time, String description, String vendor, double amount) {
+        this.date = date;
+        this.time = time;
+        this.description = description;
+        this.vendor = vendor;
+        this.amount = amount;
+    }
+
+
+    // Methods:
+
     //- toCsv() – for saving to file
-    //- toString() – for display
-    //- isDeposit(), isPayment() – for filterin
+    public static void toCSV() {
+
+    }
+
+    public static void isPayment() {
+
 }
+
+    //- toString() – for display
+
+    @Override
+    public String toString() {
+        return "Transaction{" + "date = " + date + ", time = " + time + ", description = '" + description + '\'' + ", vendor = '" + vendor + '\'' + ", amount = " + amount + '}';
+    }
+
+    //- isDeposit(), and isPayment() – for filtering
+
+    public static void isDeposit() {
+
+    }
+
+
+    }
+
