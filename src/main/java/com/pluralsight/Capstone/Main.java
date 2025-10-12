@@ -3,10 +3,12 @@ package com.pluralsight.Capstone;
 import java.util.Scanner;
 import java.util.SortedMap;
 
+import static java.lang.Double.*;
+
 public class Main {
     static Scanner Myscanner = new Scanner(System.in); //Scanner to let us read user input
 
-    public static void main(String[] args) {
+    public void main(String[] args) {
         //Create a loop that keeps the app running until the user chooses “X”
 
         //Display menu options:
@@ -26,43 +28,72 @@ public class Main {
         //Handle user input with a switch block. Using while to make a loop.
         while (true) {
             switch (selection) {
-                case "D": // if d is selected then it will run add deposit method
+                case "D": addTransaction(true);   // if d is selected then it will run add deposit method
                     break;
-                case "P": // if p is selected then it will run make payment method
+                case "P": addTransaction(false);  // if p is selected then it will run make payment method
                     break;
-                case "L": // if L is selected then it will run Ledger method and open the ledger screen
+                case "L": showLedgerMenu();// if L is selected then it will run Ledger method and open the ledger screen
                     break;
-                case "X": // if x is selected then it will exit the program
+                case "X": System.exit(0);// if x is selected then it will exit the program
                 default:
                     System.out.println("Invalid input. Try again");
             }
         }
 
-
     }
+    //Ledger menu options
+    // 1. all entries
+    // 2. all deposit entries
+    // 3. display all the negative (payment) entries
+    // 4. reports( opens another menu)
+
+    private void showLedgerMenu() {
+        System.out.println("------Ledger menu------");
+        System.out.println("    A) All entries     ");
+        System.out.println("    D) All deposit entries");
+        System.out.println("    P) Display all payment entries");
+        System.out.println("    R) Reports");
+        System.out.println("    X) Previous Menu");
+
+        String entry = Myscanner.nextLine().toUpperCase();
+            switch (entry) {
+                case "A": ;   // if A is selected then it will display all the entries
+                    break;
+                case "D": ;  // if d is selected then it will display all the deposits
+                    break;
+                case "P": ;  // if p is selected then it will display all the payments
+                    break;
+                case "R": ;  // if x is selected then it will open a report menu to do custom filtering
+                case "x":    // return to previous menu
+                default:
+                    System.out.println("Invalid input. Try again");
+            }
+        }
     // Call the methods:
     // addTransaction(true) for deposits [D]
-    // ddTransaction(false) for payments [P] (Ternary Operator )
-
+    // ddTransaction(false) for payments [P]
     public void addTransaction(boolean isDeposit){                  // In method addTransaction(boolean isDeposit) Prompt for
         System.out.println(" what is this deposit for? ");
         String description = Myscanner.nextLine();                  // - Description
         System.out.println(" WHo is the Vendor? ");
         String vendor = Myscanner.nextLine();                       //- Vendor
         System.out.println("What is the amount? ");
-        Double amount = Double.parseDouble(Myscanner.nextLine());   //- Amount
+        double amount = parseDouble(Myscanner.nextLine());          //- Amount
 
+        if (isDeposit) {                                           // Makes amount negative if it's a payment (isDeposit == false)
+        amount *= -1;
     }
-
-
-    // Convert amount to negative if isDeposit == false
-
     // Create a Transaction object with LocalDate.now() and LocalTime.now()
 
     // Call TransactionService.saveTransaction(transaction)
 
     //Print a confirmation message (add flair if you want!)
+
 }
+}
+
+
+
 
 
 
