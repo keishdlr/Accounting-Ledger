@@ -33,7 +33,7 @@ public class Transaction {
     //Getters and setters
     // these are methods that let us access and modify fields of a class
 
-    // getters
+    // getters  - lets us read variables outside this class (Transaction Class)
 
     public LocalDate getDate() {
         return date;
@@ -55,7 +55,7 @@ public class Transaction {
         return amount;
     }
 
-    //setters
+    //setters - lets us change the variable outside of this class. 'set it to something else'
 
     public void setDate(LocalDate date) {
         this.date = date;
@@ -87,19 +87,22 @@ public class Transaction {
 
     }
     //isDeposit(), and isPayment() methods for filtering
+
     //it's a payment if the amount is less than 0
+    //debit
     public boolean isPayment() {
         return amount < 0;
     }
 
     //it's a deposit if the amount is greater than 0
+    //credit
     public boolean isDeposit() {
         return amount > 0;
     }
 
     //toString() – for display
     //has to be overridden so that we get an output that we can read and understand
-    // the hashcode is no good for us in this application
+    //the hashcode is no good for us in this application
 
     @Override
     public String toString() {

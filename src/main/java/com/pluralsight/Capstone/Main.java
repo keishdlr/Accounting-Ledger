@@ -1,17 +1,40 @@
 package com.pluralsight.Capstone;
 
+import java.util.Scanner;
+import java.util.SortedMap;
+
 public class Main {
+    Scanner Myscanner = new Scanner(System.in); //Scanner to let us read user input
 
-    //Create a loop that keeps the app running until the user chooses “X”
+    public static void main(String[] args) {
+        //Create a loop that keeps the app running until the user chooses “X”
 
-    //Display menu options:
-    //D) Add Deposit
-    //P) Make Payment
-    //L) Ledger
-    //X) Exit
+        //Display menu options:
+        //D) Add Deposit
+        //P) Make Payment
+        //L) Ledger
+        //X) Exit
 
-    //Handle user input with a switch or if block
+        System.out.println("-----Home Screen-----");
+        System.out.println("    D) Add Deposit   ");
+        System.out.println("    P) Make Payment  ");
+        System.out.println("    L) Ledger        ");
+        System.out.println("    X) Exit          ");
 
+        //Handle user input with a switch or if block
+        Object selection;
+        switch (selection.Myscanner = new selection):
+        case D:
+            break;
+        case P:
+            break;
+        case L:
+            break;
+        case X:
+            default;
+
+
+    }
     // Call addTransaction(true) for deposits and addTransaction(false) for payments
 
     // In addTransaction(boolean isDeposit)
@@ -28,6 +51,11 @@ public class Main {
     // Call TransactionService.saveTransaction(transaction)
 
     //Print a confirmation message (add flair if you want!)
-
-    //If you hit any snags or want to test your transaction saving logic together, I’m here to help! You’re building momentum beautifully.
 }
+
+
+
+
+
+
+
