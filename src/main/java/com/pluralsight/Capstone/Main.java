@@ -1,5 +1,6 @@
 package com.pluralsight.Capstone;
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.SortedMap;
 
@@ -12,10 +13,6 @@ public class Main {
         //Create a loop that keeps the app running until the user chooses “X”
 
         //Display menu options:
-        //D) Add Deposit
-        //P) Make Payment
-        //L) Ledger
-        //X) Exit
 
         System.out.println("-----Home Screen-----");
         System.out.println("    D) Add Deposit   ");
@@ -57,18 +54,36 @@ public class Main {
 
         String entry = Myscanner.nextLine().toUpperCase();
             switch (entry) {
-                case "A": ;   // if A is selected then it will display all the entries
+                case "A": ; AllEntriesDisplay();      // if A is selected then it will display all the entries
                     break;
-                case "D": ;  // if d is selected then it will display all the deposits
+                case "D": ; DisplayDeposits(); // if d is selected then it will display all the deposits
                     break;
-                case "P": ;  // if p is selected then it will display all the payments
+                case "P": ; DisplayPayments();// if p is selected then it will display all the payments
                     break;
-                case "R": ;  // if x is selected then it will open a report menu to do custom filtering
-                case "x":    // return to previous menu
+                case "R":   ReportService();
+                case "X":   System.exit(1);// return to previous menu
                 default:
                     System.out.println("Invalid input. Try again");
             }
         }
+
+    private static void DisplayPayments() {
+        DisplayPayments;
+    }
+
+    private static void DisplayDeposits() {
+        List<Transaction> transactions = TransactionService.loadTransactions().deposits();
+    }
+
+    private static void AllEntriesDisplay() {
+        List<Transaction> transactions = TransactionService.loadTransactions();
+    }
+
+    private static void ReportService() {
+          // if x is selected then it will open a report menu to do custom filtering
+
+    }
+
     // Call the methods:
     // addTransaction(true) for deposits [D]
     // ddTransaction(false) for payments [P]
@@ -83,6 +98,7 @@ public class Main {
         if (isDeposit) {                                           // Makes amount negative if it's a payment (isDeposit == false)
         amount *= -1;
     }
+
     // Create a Transaction object with LocalDate.now() and LocalTime.now()
 
     // Call TransactionService.saveTransaction(transaction)
@@ -91,6 +107,7 @@ public class Main {
 
 }
 }
+
 
 
 

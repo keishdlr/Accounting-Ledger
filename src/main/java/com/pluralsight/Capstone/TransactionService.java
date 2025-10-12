@@ -8,8 +8,7 @@ public class TransactionService {
     //Contains: methods for reading and adding transactions to the file
 
     //reads from transactions.csv;
-    public String loadTransactions(){
-
+    public static String loadTransactions(){
         return "";
     }
     //appends a new transaction
