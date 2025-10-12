@@ -21,17 +21,22 @@ public class Main {
         System.out.println("    L) Ledger        ");
         System.out.println("    X) Exit          ");
 
-        //Handle user input with a switch or if block
-        Object selection;
-        switch (selection.Myscanner = new selection):
-        case D:
-            break;
-        case P:
-            break;
-        case L:
-            break;
-        case X:
-            default;
+        String selection = Myscanner.nextLine().toUpperCase();
+
+        //Handle user input with a switch block. Using while to make a loop.
+        while (true) {
+            switch (selection) {
+                case "D":
+                    break;
+                case "P":
+                    break;
+                case "L":
+                    break;
+                case "X":
+                default:
+                    System.out.println("Invalid input. Try again");
+            }
+        }
 
 
     }
