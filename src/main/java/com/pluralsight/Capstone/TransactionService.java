@@ -1,24 +1,32 @@
 package com.pluralsight.Capstone;
 
+import java.util.List;
+
 public class TransactionService {
-    //✅ TransactionService Class
-    //Purpose of this class: Handles file reading and writing transactions
-    //Contains:
-    //- loadTransactions() – reads from transactions.csv
-    //- saveTransaction(Transaction t) – appends a new transaction
-    // overwriteTransactions(List<Transaction>) – rewrites the file (for editing/deleting)
+
+    //Purpose of this class: Handles file reading and adding transactions
+    //Contains: methods for reading and adding transactions to the file
+
+    //reads from transactions.csv;
+    public String loadTransactions(){
+
+        return "";
+    }
+    //appends a new transaction
+    public String saveTransaction(Transaction t){
+
+        return "";
+    }
+
+    // rewrites the file (for editing/deleting)
+    public String overwriteTransactions(List<TransactionService>){
+
+        return "";
+    }
 }
 
-    //✅ (Optional) Ledger or ReportService Class
-    //Purpose: Handles filtering and reporting logic
-    //Contains:
-    //- displayAllTransactions(List<Transaction>)
-    //- displayDeposits(List<Transaction>)
-    //- displayPayments(List<Transaction>)
-    //- reportMonthToDate(List<Transaction>), etc.
-    //You can keep these in Main for now, but if they grow large, moving them into a separate class like ReportService or LedgerUtils will keep things clean.
-    //
-    //🧠 part of README file. explains what is in each class
+
+    //🧠 For the README file. explains what is in each class
     // Main class does → User interaction + menu logic
     // Transaction class holds → Data model
     // TransactionService class does → File handling
