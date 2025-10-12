@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.SortedMap;
 
 public class Main {
-    Scanner Myscanner = new Scanner(System.in); //Scanner to let us read user input
+    static Scanner Myscanner = new Scanner(System.in); //Scanner to let us read user input
 
     public static void main(String[] args) {
         //Create a loop that keeps the app running until the user chooses “X”
@@ -26,13 +26,13 @@ public class Main {
         //Handle user input with a switch block. Using while to make a loop.
         while (true) {
             switch (selection) {
-                case "D":
+                case "D": // if d is selected then it will run add deposit method
                     break;
-                case "P":
+                case "P": // if p is selected then it will run make payment method
                     break;
-                case "L":
+                case "L": // if L is selected then it will run Ledger method and open the ledger screen
                     break;
-                case "X":
+                case "X": // if x is selected then it will exit the program
                 default:
                     System.out.println("Invalid input. Try again");
             }
@@ -40,14 +40,20 @@ public class Main {
 
 
     }
-    // Call addTransaction(true) for deposits and addTransaction(false) for payments
+    // Call the methods:
+    // addTransaction(true) for deposits [D]
+    // ddTransaction(false) for payments [P] (Ternary Operator )
 
-    // In addTransaction(boolean isDeposit)
+    public void addTransaction(boolean isDeposit){                  // In method addTransaction(boolean isDeposit) Prompt for
+        System.out.println(" what is this deposit for? ");
+        String description = Myscanner.nextLine();                  // - Description
+        System.out.println(" WHo is the Vendor? ");
+        String vendor = Myscanner.nextLine();                       //- Vendor
+        System.out.println("What is the amount? ");
+        Double amount = Double.parseDouble(Myscanner.nextLine());   //- Amount
 
-    // Prompt for:
-    //- Description
-    //- Vendor
-    //- Amount
+    }
+
 
     // Convert amount to negative if isDeposit == false
 
