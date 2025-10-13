@@ -1,5 +1,7 @@
 package com.pluralsight.Capstone;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Scanner;
 
@@ -117,6 +119,17 @@ public class Main {
         if (isDeposit) {                                           // Makes amount negative if it's a payment (isDeposit == false)
             amount *= -1;
         }
+        Transaction transaction = new Transaction(
+                LocalDate.now(),
+                LocalTime.now(),
+                description,
+                vendor,
+                amount
+        );
+
+        TransactionService.saveTransaction(transaction);
+        System.out.println("✅ Transaction saved: " + transaction.toCsv());
+
 
         // Create a Transaction object with LocalDate.now() and LocalTime.now()
 
