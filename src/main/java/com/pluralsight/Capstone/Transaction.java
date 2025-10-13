@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Transaction {
-
     //Purpose of this class: Represents a transaction
 
     // Characteristics of every transaction
@@ -82,8 +81,7 @@ public class Transaction {
 
     //method to use to save the transaction, formatted, to the csv file
     public String toCSV() {
-    return String.format("%    s  | %    s  | %    s  |   %   s  | %2f ", date, time, description, vendor, amount);
-
+        return String.format(date + " | "  + time + " | " + description + " | " + vendor + " | " + amount);
 
     }
     //isDeposit(), and isPayment() methods for filtering

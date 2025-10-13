@@ -2,19 +2,18 @@ package com.pluralsight.Capstone;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.SortedMap;
 
 import static java.lang.Double.*;
 
 public class Main {
     static Scanner Myscanner = new Scanner(System.in); //Scanner to let us read user input
 
-    public void main(String[] args) {
+    public static void main(String[] args) {
         //Create a loop that keeps the app running until the user chooses “X”
 
         //Display menu options:
 
-        System.out.println("-----Home Screen-----");
+        System.out.println("--💸---Home Screen---💸--");
         System.out.println("    D) Add Deposit   ");
         System.out.println("    P) Make Payment  ");
         System.out.println("    L) Ledger        ");
@@ -44,8 +43,8 @@ public class Main {
     // 3. display all the negative (payment) entries
     // 4. reports( opens another menu)
 
-    private void showLedgerMenu() {
-        System.out.println("------Ledger menu------");
+    private static void showLedgerMenu() {
+        System.out.println("--💰---Ledger menu---💰--");
         System.out.println("    A) All entries     ");
         System.out.println("    D) All deposit entries");
         System.out.println("    P) Display all payment entries");
@@ -54,11 +53,11 @@ public class Main {
 
         String entry = Myscanner.nextLine().toUpperCase();
             switch (entry) {
-                case "A": ; AllEntriesDisplay();      // if A is selected then it will display all the entries
+                case "A":  AllEntriesDisplay();      // if A is selected then it will display all the entries
                     break;
-                case "D": ; DisplayDeposits(); // if d is selected then it will display all the deposits
+                case "D":  DisplayDeposits(); // if d is selected then it will display all the deposits
                     break;
-                case "P": ; DisplayPayments();// if p is selected then it will display all the payments
+                case "P":  DisplayPayments();// if p is selected then it will display all the payments
                     break;
                 case "R":   ReportService();
                 case "X":   System.exit(1);// return to previous menu
@@ -68,26 +67,47 @@ public class Main {
         }
 
     private static void DisplayPayments() {
-        DisplayPayments;
+        //DisplayPayments;
     }
 
     private static void DisplayDeposits() {
-        List<Transaction> transactions = TransactionService.loadTransactions().deposits();
+        List<Transaction> transactions = TransactionService.loadTransactions();//deposits();
     }
 
     private static void AllEntriesDisplay() {
-        List<Transaction> transactions = TransactionService.loadTransactions();
+        List<Transaction> transactions = TransactionService.loadTransactions();//allEntries();
     }
 
     private static void ReportService() {
           // if x is selected then it will open a report menu to do custom filtering
-
+        //1) Month To Date
+        //§ 2) Previous Month
+        //§ 3) Year To Date
+        //§ 4) Previous Year
+        //§ 5) Search by Vendor - prompt the user for the vendor name
+        //and display all entries for that vendor
+        //§ 0) Back - go back to the Ledger page
+        String Rselect = Myscanner.nextLine();
+        while (true) {
+            switch (Rselect) {
+                case "M": ;   // month to date method
+                    break;
+                case "P":     // previous month
+                    break;
+                case "Y":     // year to date method
+                    break;
+                case "V":     // search by vendor
+                case "X": System.exit(2); // if x is selected then it will exit the program
+                default:
+                    System.out.println("Invalid input. Try again");
+            }
+        }
     }
 
     // Call the methods:
     // addTransaction(true) for deposits [D]
     // ddTransaction(false) for payments [P]
-    public void addTransaction(boolean isDeposit){                  // In method addTransaction(boolean isDeposit) Prompt for
+    public static void addTransaction(boolean isDeposit) {                  // In method addTransaction(boolean isDeposit) Prompt for
         System.out.println(" what is this deposit for? ");
         String description = Myscanner.nextLine();                  // - Description
         System.out.println(" WHo is the Vendor? ");
@@ -96,16 +116,17 @@ public class Main {
         double amount = parseDouble(Myscanner.nextLine());          //- Amount
 
         if (isDeposit) {                                           // Makes amount negative if it's a payment (isDeposit == false)
-        amount *= -1;
+            amount *= -1;
+        }
+
+        // Create a Transaction object with LocalDate.now() and LocalTime.now()
+
+        // Call TransactionService.saveTransaction(transaction)
+
+        //Print a confirmation message (add flair if you want!)
+
     }
 
-    // Create a Transaction object with LocalDate.now() and LocalTime.now()
-
-    // Call TransactionService.saveTransaction(transaction)
-
-    //Print a confirmation message (add flair if you want!)
-
-}
 }
 
 
