@@ -11,18 +11,17 @@ public class Main {
     public static void main(String[] args) {
         //Create a loop that keeps the app running until the user chooses “X”
 
-        //Display menu options:
-
-        System.out.println("--💸---Home Screen---💸--");
-        System.out.println("    D) Add Deposit   ");
-        System.out.println("    P) Make Payment  ");
-        System.out.println("    L) Ledger        ");
-        System.out.println("    X) Exit          ");
-
         String selection = Myscanner.nextLine().toUpperCase();
 
         //Handle user input with a switch block. Using while to make a loop.
         while (true) {
+            //Display menu options:
+
+            System.out.println("--💸---Home Screen---💸--");
+            System.out.println("    D) Add Deposit   ");
+            System.out.println("    P) Make Payment  ");
+            System.out.println("    L) Ledger        ");
+            System.out.println("    X) Exit          ");
             switch (selection) {
                 case "D": addTransaction(true);   // if d is selected then it will run add deposit method
                     break;
