@@ -54,7 +54,7 @@ public class Main {
 
         String entry = Myscanner.nextLine().toUpperCase();
             switch (entry) {
-                case "A":  AllEntriesDisplay();      // if A is selected then it will display all the entries
+                case "A":  AllEntriesDisplay();  // if A is selected then it will display all the entries
                     break;
                 case "D":  DisplayDeposits(); // if d is selected then it will display all the deposits
                     break;
@@ -68,15 +68,23 @@ public class Main {
         }
 
     private static void DisplayPayments() {
-        //DisplayPayments;
+        for (Transaction t : transactions) {
+            System.out.println(t.toCsv());
+        }
     }
 
     private static void DisplayDeposits() {
         List<Transaction> transactions = TransactionService.loadTransactions();//deposits();
+        for (Transaction t : transactions) {
+            System.out.println(t.toCsv());
+        }
     }
 
     private static void AllEntriesDisplay() {
         List<Transaction> transactions = TransactionService.loadTransactions();//allEntries();
+        for (Transaction t : transactions) {
+            System.out.println(t.toCsv());
+        }
     }
 
     private static void ReportService() {
@@ -128,15 +136,7 @@ public class Main {
         );
 
         TransactionService.saveTransaction(transaction);
-        System.out.println("✅ Transaction saved: " + transaction.toCsv());
-
-
-        // Create a Transaction object with LocalDate.now() and LocalTime.now()
-
-        // Call TransactionService.saveTransaction(transaction)
-
-        //Print a confirmation message (add flair if you want!)
-
+        System.out.println("✅ Transaction saved: " + transaction.toCSV());
     }
 
 }
