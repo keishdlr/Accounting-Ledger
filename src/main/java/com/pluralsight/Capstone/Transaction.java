@@ -80,9 +80,11 @@ public class Transaction {
     // Other Methods:
 
     //method to use to save the transaction, formatted, to the csv file
+    // uses pipe delimiters (|)
+    // Format the amount to two decimal places
+    // Matches CSV structure in TransactionService
     public String toCSV() {
-        return String.format(date + " | "  + time + " | " + description + " | " + vendor + " | " + amount);
-
+            return String.format("%s|%s|%s|%s|%.2f", date, time, description, vendor, amount);
     }
     //isDeposit(), and isPayment() methods for filtering
 

@@ -5,8 +5,6 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Scanner;
 
-import static java.lang.Double.*;
-
 public class Main {
     static Scanner Myscanner = new Scanner(System.in); //Scanner to let us read user input
 
@@ -68,27 +66,28 @@ public class Main {
         }
 
     private static void DisplayPayments() {
+       List<Transaction> transactions = TransactionService.loadTransactions()payments();
         for (Transaction t : transactions) {
-            System.out.println(t.toCsv());
+            System.out.println(t.toCSV());
         }
     }
 
     private static void DisplayDeposits() {
-        List<Transaction> transactions = TransactionService.loadTransactions();//deposits();
+        List<Transaction> transactions = TransactionService.loadTransactions();deposits();
         for (Transaction t : transactions) {
-            System.out.println(t.toCsv());
+            System.out.println(t.toCSV());
         }
     }
 
     private static void AllEntriesDisplay() {
-        List<Transaction> transactions = TransactionService.loadTransactions();//allEntries();
+        List<Transaction> transactions = TransactionService.loadTransactions();allEntries();
         for (Transaction t : transactions) {
-            System.out.println(t.toCsv());
+            System.out.println(t.toCSV());
         }
     }
 
     private static void ReportService() {
-          // if x is selected then it will open a report menu to do custom filtering
+        // if x is selected then it will open a report menu to do custom filtering
         //1) Month To Date
         //§ 2) Previous Month
         //§ 3) Year To Date
@@ -96,8 +95,16 @@ public class Main {
         //§ 5) Search by Vendor - prompt the user for the vendor name
         //and display all entries for that vendor
         //§ 0) Back - go back to the Ledger page
-        String Rselect = Myscanner.nextLine();
+
         while (true) {
+            System.out.println("--📊 Reports Menu 📊 --");
+            System.out.println("  M) Month To Date     ");
+            System.out.println("  P) Previous Month    ");
+            System.out.println("  Y) Year To Date      ");
+            System.out.println("  V) Search by Vendor  ");
+            System.out.println("  X) Back              ");
+
+            String Rselect = Myscanner.nextLine();
             switch (Rselect) {
                 case "M": ;   // month to date method
                     break;
@@ -119,7 +126,7 @@ public class Main {
     public static void addTransaction(boolean isDeposit) {                  // In method addTransaction(boolean isDeposit) Prompt for
         System.out.println(" what is this deposit for? ");
         String description = Myscanner.nextLine();                  // - Description
-        System.out.println(" WHo is the Vendor? ");
+        System.out.println(" Who is the Vendor? ");
         String vendor = Myscanner.nextLine();                       //- Vendor
         System.out.println("What is the amount? ");
         double amount = parseDouble(Myscanner.nextLine());          //- Amount

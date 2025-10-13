@@ -1,6 +1,4 @@
 package com.pluralsight.Capstone;
-
-import javax.sound.sampled.Line;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -16,10 +14,13 @@ public class TransactionService {
     //Contains: methods for reading and adding transactions to the file
 
     //reads from transactions.csv;
-    public static List<Transaction> loadTransactions(){
+    //- Reads from transactions.csv using buffered I/O
+    //- Parses each line into a Transaction object
+    //- Handles malformed lines with a length check
+    public static List<Transaction> loadTransactions()
         List<Transaction> transactions = new ArrayList<>(); // return transactions as a list
         //try with resources makes sure the file closes automatically
-        try (BufferedReader reader = new BufferedReader(new FileReader("transactions.csv"))) {
+        try(BufferedReader reader = new BufferedReader(new FileReader("transactions.csv"))) {
             //Read each line
             String line;
             while((line = reader.readLine()) != null){
@@ -36,28 +37,29 @@ public class TransactionService {
                     //creates object and adds it to list
                     transactions.add(new Transaction(date, time, description, vendor, amount));
                 }
+                else {
+                    System.err.println("Skipping malformed line: " + line);
+                }
             }
         } catch (IOException e) {
             //Prints error message when file reading fails
             System.err.println("Error reading transaction: " + e.getMessage());
+            return transactions;
         }
-        {
-        return transactions;
-    }}
+
     //appends a new transaction the csv file
-    public void saveTransaction(Transaction t) {
+    public static void saveTransaction(Transaction t){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true))) {
-            //writes the transaction in the csv format (transaction.java) and eats the buffer
-            writer.write(t.toCSV()); // Assumes Transaction has a toCsv() method
-            writer.newLine();
-        } catch (IOException e) {
-            //error message when writing fails
-            System.err.println("Error saving transaction: " + e.getMessage());
-        }
-        return;
-    }
+        //writes the transaction in the csv format (transaction.java) and eats the buffer
+        writer.write(t.toCSV()); // Assumes Transaction has a toCsv() method
+        writer.newLine();
+    } catch (IOException e) {
+        //error message when writing fails
+        System.err.println("Error saving transaction: " + e.getMessage());
+    }}
+
     // rewrites the file (for editing/deleting)
-    public void overwriteTransactions(List<Transaction>transactions){
+    public static void overwriteTransactions(List<Transaction>transactions){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv"))) {
             for (Transaction t : transactions) {
                 writer.write(t.toCSV());
@@ -68,11 +70,4 @@ public class TransactionService {
         }
     }
 }
-
-
-    //🧠 For the README file. explains what is in each class
-    // Main class does → User interaction + menu logic
-    // Transaction class holds → Data model (defines the kinds of data I am working with, how the data is grouped, how they relate to each other)
-    // TransactionService class does → File handling
-    // (Optional) Report/Ledger class → Filtering/reporting logic
-
+        }}}
