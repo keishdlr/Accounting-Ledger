@@ -37,10 +37,14 @@ public class ReportService {
         }}
         // Display transactions from the current month
         public static void reportMonthToDate (List < Transaction > transactions) {
+           //Get today's date
             LocalDate now = LocalDate.now();
+            // for loop to go through each transaction in the list
             for (Transaction t : transactions) {
+                //nested if statement to check if the month and year is the same as today
                 if (t.getDate().getMonth() == now.getMonth() &&
                         t.getDate().getYear() == now.getYear()) {
+                    // print the transaction that matches the year and month
                     System.out.println(t.toCSV());
                 }
             }

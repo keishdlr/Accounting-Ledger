@@ -17,13 +17,13 @@ public class TransactionService {
     //- Reads from transactions.csv using buffered I/O
     //- Parses each line into a Transaction object
     //- Handles malformed lines with a length check
-    public static List<Transaction> loadTransactions()
+    public static List<Transaction> loadTransactions() {
         List<Transaction> transactions = new ArrayList<>(); // return transactions as a list
         //try with resources makes sure the file closes automatically
-        try(BufferedReader reader = new BufferedReader(new FileReader("transactions.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("transactions.csv"))) {
             //Read each line
             String line;
-            while((line = reader.readLine()) != null){
+            while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("\\|"); // Split line into parts
 
                 //Ensure the line has all the expected fields
@@ -36,16 +36,17 @@ public class TransactionService {
 
                     //creates object and adds it to list
                     transactions.add(new Transaction(date, time, description, vendor, amount));
-                }
-                else {
+                } else {
                     System.err.println("Skipping malformed line: " + line);
                 }
             }
         } catch (IOException e) {
             //Prints error message when file reading fails
             System.err.println("Error reading transaction: " + e.getMessage());
-            return transactions;
+
         }
+        return transactions;
+    }
 
     //appends a new transaction the csv file
     public static void saveTransaction(Transaction t){
@@ -70,4 +71,4 @@ public class TransactionService {
         }
     }
 }
-        }}}
+

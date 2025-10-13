@@ -5,13 +5,12 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Main {
     static Scanner Myscanner = new Scanner(System.in); //Scanner to let us read user input
 
     public static void main(String[] args) {
         //Create a loop that keeps the app running until the user chooses “X”
-
-        String selection = Myscanner.nextLine().toUpperCase();
 
         //Handle user input with a switch block. Using while to make a loop.
         while (true) {
@@ -22,6 +21,8 @@ public class Main {
             System.out.println("    P) Make Payment  ");
             System.out.println("    L) Ledger        ");
             System.out.println("    X) Exit          ");
+
+            String selection = Myscanner.nextLine().toUpperCase();
             switch (selection) {
                 case "D": addTransaction(true);   // if d is selected then it will run add deposit method
                     break;
@@ -66,21 +67,21 @@ public class Main {
         }
 
     private static void DisplayPayments() {
-       List<Transaction> transactions = TransactionService.loadTransactions()payments();
+       List<Transaction> transactions = TransactionService.loadTransactions();//payments();
         for (Transaction t : transactions) {
             System.out.println(t.toCSV());
         }
     }
 
     private static void DisplayDeposits() {
-        List<Transaction> transactions = TransactionService.loadTransactions();deposits();
+        List<Transaction> transactions = TransactionService.loadTransactions();//deposits();
         for (Transaction t : transactions) {
             System.out.println(t.toCSV());
         }
     }
 
     private static void AllEntriesDisplay() {
-        List<Transaction> transactions = TransactionService.loadTransactions();allEntries();
+        List<Transaction> transactions = TransactionService.loadTransactions();//allEntries();
         for (Transaction t : transactions) {
             System.out.println(t.toCSV());
         }
@@ -106,7 +107,7 @@ public class Main {
 
             String Rselect = Myscanner.nextLine();
             switch (Rselect) {
-                case "M": ;   // month to date method
+                case "M":    // month to date method
                     break;
                 case "P":     // previous month
                     break;
@@ -123,15 +124,15 @@ public class Main {
     // Call the methods:
     // addTransaction(true) for deposits [D]
     // ddTransaction(false) for payments [P]
-    public static void addTransaction(boolean isDeposit) {                  // In method addTransaction(boolean isDeposit) Prompt for
-        System.out.println(" what is this deposit for? ");
+    public static void addTransaction(boolean isDeposit) {          // In method addTransaction(boolean isDeposit) Prompt for
+        System.out.println(" what is this transaction for? ");
         String description = Myscanner.nextLine();                  // - Description
         System.out.println(" Who is the Vendor? ");
         String vendor = Myscanner.nextLine();                       //- Vendor
         System.out.println("What is the amount? ");
-        double amount = parseDouble(Myscanner.nextLine());          //- Amount
+        double amount = Double.parseDouble((Myscanner.nextLine())); //- Amount
 
-        if (isDeposit) {                                           // Makes amount negative if it's a payment (isDeposit == false)
+        if (!isDeposit) {                                           // Makes amount negative if it's a payment (isDeposit == false)
             amount *= -1;
         }
         Transaction transaction = new Transaction(
