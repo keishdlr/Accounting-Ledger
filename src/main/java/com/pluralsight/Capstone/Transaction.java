@@ -86,6 +86,7 @@ public class Transaction {
     public String toCSV() {
             return String.format("%s|%s|%s|%s|%.2f", date, time, description, vendor, amount);
     }
+
     //isDeposit(), and isPayment() methods for filtering
 
     //it's a payment if the amount is less than 0

@@ -126,9 +126,8 @@ public class Main {
             System.out.println("  V) Search by Vendor  ");
             System.out.println("  X) Back              ");
 
-            String Rselect = Myscanner.nextLine();
+            String Rselect = Myscanner.nextLine().toUpperCase();
             List<Transaction> transactions = TransactionService.loadTransactions();
-            LedgerReports.reportMonthToDate(transactions);
             switch (Rselect) {
                 case "M":    LedgerReports.reportMonthToDate(transactions);    // month to date method
                     break;
@@ -136,8 +135,12 @@ public class Main {
                     break;
                 case "Y":    LedgerReports.reportYearToDate(transactions);     // year to date method
                     break;
-                case "V":    LedgerReports.reportByVendor(transactions, Rselect);  // search by vendor
-                case "X":    showLedgerMenu();                                  // if x is selected then it will go back to  ledger menu
+                case "V":    System.out.println(" What is the vendor Name?");  // search by vendor
+                             String vendorName = Myscanner.nextLine().trim();
+                             LedgerReports.reportByVendor(transactions, vendorName);
+                             break;
+                case "X":
+                             showLedgerMenu();                                 // if x is selected then it will go back to  ledger menu
                     break;
                 default:
                     System.out.println("Invalid input. Try again");
