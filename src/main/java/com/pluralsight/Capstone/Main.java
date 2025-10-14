@@ -88,8 +88,9 @@ public class Main {
     private static void DisplayPayments() {
        List<Transaction> transactions = TransactionService.loadTransactions();//payments();
         for (Transaction t : transactions) {
+            if (t.isPayment()) { // prints only transactions with negative values
             System.out.println(t.toCSV());
-        }
+        }}
     }
 
     private static void DisplayDeposits() {
