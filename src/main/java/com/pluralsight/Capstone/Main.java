@@ -95,8 +95,9 @@ public class Main {
     private static void DisplayDeposits() {
         List<Transaction> transactions = TransactionService.loadTransactions();//deposits();
         for (Transaction t : transactions) {
+            if (t.isDeposit()) { // Prints only transactions with positive values
             System.out.println(t.toCSV());
-        }
+        }}
     }
 
     private static void AllEntriesDisplay() {
