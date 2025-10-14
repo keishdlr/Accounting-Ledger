@@ -10,8 +10,21 @@ public class Main {
     static Scanner Myscanner = new Scanner(System.in); //Scanner to let us read user input
 
     public static void main(String[] args) {
-        //Create a loop that keeps the app running until the user chooses “X”
+        int hour = LocalTime.now().getHour();
+        String greeting;
 
+        if (hour >= 5 && hour < 12) {
+            greeting = "Good morning ☕🌄";
+        } else if (hour >= 12 && hour < 17) {
+            greeting = "Good afternoon ☀️";
+        } else if (hour >= 17 && hour < 21) {
+            greeting = "Good evening 🌇";
+        } else {
+            greeting = "Good night 🌙";
+        }
+        System.out.println(greeting);
+
+        //loop that keeps the app running until the user chooses “X”
         //Handle user input with a switch block. Using while to make a loop.
         while (true) {
             //Display menu options:
