@@ -44,6 +44,8 @@ public class Main {
     // 4. reports( opens another menu)
 
     private static void showLedgerMenu() {
+
+        while (true){
         System.out.println("---💰---Ledger menu---💰---");
         System.out.println("    A) All entries         ");
         System.out.println("    D) All deposit entries ");
@@ -52,19 +54,19 @@ public class Main {
         System.out.println("    X) Previous Menu       ");
 
         String entry = Myscanner.nextLine().toUpperCase();
-            switch (entry) {
+        switch (entry) {
                 case "A":  AllEntriesDisplay();  // if A is selected then it will display all the entries
                     break;
                 case "D":  DisplayDeposits();    // if D is selected then it will display all the deposits
                     break;
                 case "P":  DisplayPayments();    // if P is selected then it will display all the payments
                     break;
-                case "R":   ReportService();
-                case "X":   System.exit(1);// return to previous menu
+                case "R":  ReportService();      // if R is selected thn it will open the report menu
+                case "X":  System.exit(1); // return to previous menu
                 default:
                     System.out.println("Invalid input. Try again");
             }
-        }
+        }}
 
     private static void DisplayPayments() {
        List<Transaction> transactions = TransactionService.loadTransactions();//payments();
