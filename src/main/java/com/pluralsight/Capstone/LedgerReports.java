@@ -42,7 +42,6 @@ public class LedgerReports {
 
     // Display transactions by vendor name
     public static void reportByVendor(List<Transaction> transactions, String vendorName) {
-        vendorName = Myscanner.nextLine();
         for (Transaction t : transactions) {
             if (t.getVendor().equalsIgnoreCase(vendorName.trim())) {
                 System.out.println(t.toCSV());

@@ -126,7 +126,7 @@ public class Main {
             System.out.println("  V) Search by Vendor  ");
             System.out.println("  X) Back              ");
 
-            String Rselect = Myscanner.nextLine().toUpperCase();
+            String Rselect = Myscanner.nextLine().toUpperCase(); // ignores case when selecting a menu option
             List<Transaction> transactions = TransactionService.loadTransactions();
             switch (Rselect) {
                 case "M":    LedgerReports.reportMonthToDate(transactions);    // month to date method
