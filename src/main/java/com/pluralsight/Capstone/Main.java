@@ -62,8 +62,8 @@ public class Main {
                 case "P":  DisplayPayments();    // if P is selected then it will display all the payments
                     break;
                 case "R":  ReportService();      // if R is selected thn it will open the report menu
-                case "X":  System.exit(1); // return to previous menu
-                default:
+                case "X":  return;              // return to previous menu
+            default:
                     System.out.println("Invalid input. Try again");
             }
         }}
@@ -117,8 +117,8 @@ public class Main {
                     break;
                 case "Y":    LedgerReports.reportYearToDate(transactions);     // year to date method
                     break;
-                case "V":    LedgerReports.reportByVendor(transactions, Rselect);   // search by vendor
-                case "X":    System.exit(2);                            // if x is selected then it will exit the program
+                case "V":    LedgerReports.reportByVendor(transactions, Rselect);  // search by vendor
+                case "X":    showLedgerMenu();                                  // if x is selected then it will go back to  ledger menu
                     break;
                 default:
                     System.out.println("Invalid input. Try again");
