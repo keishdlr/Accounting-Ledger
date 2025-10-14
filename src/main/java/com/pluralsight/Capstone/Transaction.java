@@ -103,7 +103,6 @@ public class Transaction {
     //toString() – for display
     //has to be overridden so that we get an output that we can read and understand
     //the hashcode is no good for us in this application
-
     @Override
     public String toString() {
         return "Transaction{" + "date = " + date + ", time = " + time + ", description = '" + description + '\'' + ", vendor = '" + vendor + '\'' + ", amount = " + amount + '}';

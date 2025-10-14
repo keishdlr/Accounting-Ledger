@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Scanner;
-
+import com.pluralsight.Capstone.LedgerReports;
 
 public class Main {
     static Scanner Myscanner = new Scanner(System.in); //Scanner to let us read user input
@@ -17,20 +17,20 @@ public class Main {
             //Display menu options:
 
             System.out.println("--💸---Home Screen---💸--");
-            System.out.println("    D) Add Deposit   ");
-            System.out.println("    P) Make Payment  ");
-            System.out.println("    L) Ledger        ");
-            System.out.println("    X) Exit          ");
+            System.out.println("    D) Add Deposit        ");
+            System.out.println("    P) Make Payment       ");
+            System.out.println("    L) Ledger             ");
+            System.out.println("    X) Exit               ");
 
             String selection = Myscanner.nextLine().toUpperCase();
             switch (selection) {
-                case "D": addTransaction(true);   // if d is selected then it will run add deposit method
+                case "D": addTransaction(true);   // if D is selected then it will run add deposit method
                     break;
                 case "P": addTransaction(false);  // if p is selected then it will run make payment method
                     break;
-                case "L": showLedgerMenu();// if L is selected then it will run Ledger method and open the ledger screen
+                case "L": showLedgerMenu();                // if L is selected then it will run Ledger method and open the ledger screen
                     break;
-                case "X": System.exit(0);// if x is selected then it will exit the program
+                case "X": System.exit(0);           // if X is selected then it will exit the program
                 default:
                     System.out.println("Invalid input. Try again");
             }
@@ -44,20 +44,20 @@ public class Main {
     // 4. reports( opens another menu)
 
     private static void showLedgerMenu() {
-        System.out.println("--💰---Ledger menu---💰--");
-        System.out.println("    A) All entries     ");
-        System.out.println("    D) All deposit entries");
-        System.out.println("    P) Display all payment entries");
-        System.out.println("    R) Reports");
-        System.out.println("    X) Previous Menu");
+        System.out.println("---💰---Ledger menu---💰---");
+        System.out.println("    A) All entries         ");
+        System.out.println("    D) All deposit entries ");
+        System.out.println("    P) All payment entries ");
+        System.out.println("    R) Reports             ");
+        System.out.println("    X) Previous Menu       ");
 
         String entry = Myscanner.nextLine().toUpperCase();
             switch (entry) {
                 case "A":  AllEntriesDisplay();  // if A is selected then it will display all the entries
                     break;
-                case "D":  DisplayDeposits(); // if d is selected then it will display all the deposits
+                case "D":  DisplayDeposits();    // if D is selected then it will display all the deposits
                     break;
-                case "P":  DisplayPayments();// if p is selected then it will display all the payments
+                case "P":  DisplayPayments();    // if P is selected then it will display all the payments
                     break;
                 case "R":   ReportService();
                 case "X":   System.exit(1);// return to previous menu
@@ -106,15 +106,18 @@ public class Main {
             System.out.println("  X) Back              ");
 
             String Rselect = Myscanner.nextLine();
+            List<Transaction> transactions = TransactionService.loadTransactions();
+            LedgerReports.reportMonthToDate(transactions);
             switch (Rselect) {
-                case "M":    // month to date method
+                case "M":    LedgerReports.reportMonthToDate(transactions);    // month to date method
                     break;
-                case "P":     // previous month
+                case "P":    LedgerReports.reportPreviousMonth(transactions);  // previous month
                     break;
-                case "Y":     // year to date method
+                case "Y":    LedgerReports.reportYearToDate(transactions);     // year to date method
                     break;
-                case "V":     // search by vendor
-                case "X": System.exit(2); // if x is selected then it will exit the program
+                case "V":    LedgerReports.reportByVendor(transactions, Rselect);   // search by vendor
+                case "X":    System.exit(2);                            // if x is selected then it will exit the program
+                    break;
                 default:
                     System.out.println("Invalid input. Try again");
             }
@@ -123,19 +126,19 @@ public class Main {
 
     // Call the methods:
     // addTransaction(true) for deposits [D]
-    // ddTransaction(false) for payments [P]
+    // addTransaction(false) for payments [P]
     public static void addTransaction(boolean isDeposit) {          // In method addTransaction(boolean isDeposit) Prompt for
         System.out.println(" what is this transaction for? ");
         String description = Myscanner.nextLine();                  // - Description
         System.out.println(" Who is the Vendor? ");
         String vendor = Myscanner.nextLine();                       //- Vendor
-        System.out.println("What is the amount? ");
+        System.out.println(" What is the amount? ");
         double amount = Double.parseDouble((Myscanner.nextLine())); //- Amount
 
         if (!isDeposit) {                                           // Makes amount negative if it's a payment (isDeposit == false)
             amount *= -1;
         }
-        Transaction transaction = new Transaction(
+        Transaction transaction = new Transaction(                 // Adds local date and time to every transaction
                 LocalDate.now(),
                 LocalTime.now(),
                 description,
@@ -148,14 +151,3 @@ public class Main {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-

@@ -8,9 +8,9 @@ import java.util.List;
 public class TransactionService {
 // Defined the fields that make up a transaction
 // Lets me create, save, and load transactions
-// Acts as a bridge between your user interface and your file/database
+// Acts as a bridge between the user interface and your file/database
 
-    //Purpose of this class: Handles file reading and adding transactions
+    //Purpose of the TransactionService class: Handles file reading and adding transactions
     //Contains: methods for reading and adding transactions to the file
 
     //reads from transactions.csv;
@@ -24,20 +24,20 @@ public class TransactionService {
             //Read each line
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] parts = line.split("\\|"); // Split line into parts
+                String[] parts = line.split("\\|"); // Split line into (5) parts
 
                 //Ensure the line has all the expected fields
-                if (parts.length == 5) {
-                    LocalDate date = LocalDate.parse(parts[0]);
-                    LocalTime time = LocalTime.parse(parts[1]);
-                    String description = parts[2];
-                    String vendor = parts[3];
-                    double amount = Double.parseDouble(parts[4]);
+                if (parts.length == 5) {         // checks for proper input by checking the length
+                    LocalDate date = LocalDate.parse(parts[0]); // part 1 (index 0) is the date
+                    LocalTime time = LocalTime.parse(parts[1]); // part 2 (index 1) is time
+                    String description = parts[2];              // part 3 (index 2) is the description
+                    String vendor = parts[3];                   // part 4 (index 3) is the vendor
+                    double amount = Double.parseDouble(parts[4]); // part 5 (index 4) is the amount
 
-                    //creates object and adds it to list
+                    //creates object and adds it to the list
                     transactions.add(new Transaction(date, time, description, vendor, amount));
                 } else {
-                    System.err.println("Skipping malformed line: " + line);
+                    System.err.println("Skipping malformed line: " + line); // when if fails it goes to this line and skips the input
                 }
             }
         } catch (IOException e) {
@@ -48,27 +48,17 @@ public class TransactionService {
         return transactions;
     }
 
-    //appends a new transaction the csv file
+    //appends a new transaction to the csv file
     public static void saveTransaction(Transaction t){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true))) {
         //writes the transaction in the csv format (transaction.java) and eats the buffer
-        writer.write(t.toCSV()); // Assumes Transaction has a toCsv() method
-        writer.newLine();
+        writer.write(t.toCSV()); // Transaction has a toCsv() method
+        writer.newLine();        // eats the line
     } catch (IOException e) {
         //error message when writing fails
         System.err.println("Error saving transaction: " + e.getMessage());
     }}
 
-    // rewrites the file (for editing/deleting)
-    public static void overwriteTransactions(List<Transaction>transactions){
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv"))) {
-            for (Transaction t : transactions) {
-                writer.write(t.toCSV());
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            System.err.println("Error overwriting transactions: " + e.getMessage());
-        }
-    }
+
 }
 

@@ -2,12 +2,15 @@ package com.pluralsight.Capstone;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Scanner;
+
+import static com.pluralsight.Capstone.Main.Myscanner;
 
 public class LedgerReports {
     //Report Methods
 
 // Display transactions from the current month
-    public void reportMonthToDate(List<Transaction> transactions) {
+    public static void reportMonthToDate(List<Transaction> transactions) {
         LocalDate now = LocalDate.now();
         for (Transaction t : transactions) {
             if (t.getDate().getMonth() == now.getMonth() && t.getDate().getYear() == now.getYear()) {
@@ -15,9 +18,9 @@ public class LedgerReports {
             }
         }
     }
-// Display transactions from the previous month
 
-    public void reportPreviousMonth(List<Transaction> transactions) {
+    // Display transactions from the previous month
+    public static void reportPreviousMonth(List<Transaction> transactions) {
         LocalDate now = LocalDate.now();
         LocalDate previousMonth = now.minusMonths(1);
         for (Transaction t : transactions) {
@@ -27,8 +30,8 @@ public class LedgerReports {
             }
         }
     }
-// Display transactions from the current year
-    public void reportYearToDate(List<Transaction> transactions) {
+    // Display transactions from the current year
+    public static void reportYearToDate(List<Transaction> transactions) {
         int currentYear = LocalDate.now().getYear();
         for (Transaction t : transactions) {
             if (t.getDate().getYear() == currentYear) {
@@ -36,19 +39,10 @@ public class LedgerReports {
             }
         }
     }
-// Display transactions from the previous year
 
-    public void reportPreviousYear(List<Transaction> transactions) {
-        int previousYear = LocalDate.now().minusYears(1).getYear();
-        for (Transaction t : transactions) {
-            if (t.getDate().getYear() == previousYear) {
-                System.out.println(t.toCSV());
-            }
-        }
-    }
-// Display transactions by vendor name
-
-    public void reportByVendor(List<Transaction> transactions, String vendorName) {
+    // Display transactions by vendor name
+    public static void reportByVendor(List<Transaction> transactions, String vendorName) {
+        vendorName = Myscanner.nextLine();
         for (Transaction t : transactions) {
             if (t.getVendor().equalsIgnoreCase(vendorName.trim())) {
                 System.out.println(t.toCSV());
