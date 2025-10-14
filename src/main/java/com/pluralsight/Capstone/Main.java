@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Scanner;
-import com.pluralsight.Capstone.LedgerReports;
 
 public class Main {
     static Scanner Myscanner = new Scanner(System.in); //Scanner to let us read user input
@@ -71,14 +70,19 @@ public class Main {
         System.out.println("    X) Previous Menu       ");
 
         String entry = Myscanner.nextLine().toUpperCase();
+        List<Transaction> transactions = TransactionService.loadTransactions();
         switch (entry) {
                 case "A":  AllEntriesDisplay();  // if A is selected then it will display all the entries
+                           LedgerMenuServices.displayAllTransactions(transactions);
                     break;
                 case "D":  DisplayDeposits();    // if D is selected then it will display all the deposits
+                            LedgerMenuServices.displayDeposits(transactions);
                     break;
                 case "P":  DisplayPayments();    // if P is selected then it will display all the payments
+                            LedgerMenuServices.displayPayments(transactions);
                     break;
                 case "R":  ReportService();      // if R is selected thn it will open the report menu
+                    break;
                 case "X":  return;              // return to previous menu
             default:
                     System.out.println("Invalid input. Try again");
@@ -124,23 +128,23 @@ public class Main {
             System.out.println("  P) Previous Month    ");
             System.out.println("  Y) Year To Date      ");
             System.out.println("  V) Search by Vendor  ");
-            System.out.println("  X) Back              ");
+            System.out.println("  X) Close Program              ");
 
             String Rselect = Myscanner.nextLine().toUpperCase(); // ignores case when selecting a menu option
             List<Transaction> transactions = TransactionService.loadTransactions();
             switch (Rselect) {
-                case "M":    LedgerReports.reportMonthToDate(transactions);    // month to date method
+                case "M":    ReportMenuServices.reportMonthToDate(transactions);    // month to date method
                     break;
-                case "P":    LedgerReports.reportPreviousMonth(transactions);  // previous month
+                case "P":    ReportMenuServices.reportPreviousMonth(transactions);  // previous month
                     break;
-                case "Y":    LedgerReports.reportYearToDate(transactions);     // year to date method
+                case "Y":    ReportMenuServices.reportYearToDate(transactions);     // year to date method
                     break;
                 case "V":    System.out.println(" What is the vendor Name?");  // search by vendor
                              String vendorName = Myscanner.nextLine().trim();
-                             LedgerReports.reportByVendor(transactions, vendorName);
+                             ReportMenuServices.reportByVendor(transactions, vendorName);
                              break;
                 case "X":
-                             showLedgerMenu();                                 // if x is selected then it will go back to  ledger menu
+                             System.exit(0);                         // if x is selected then program will end
                     break;
                 default:
                     System.out.println("Invalid input. Try again");
@@ -169,7 +173,7 @@ public class Main {
                 vendor,
                 amount
         );
-
+        //confirmation that the transaction was saved
         TransactionService.saveTransaction(transaction);
         System.out.println("✅ Transaction saved: " + transaction.toCSV());
     }

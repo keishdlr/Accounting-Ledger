@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReportService {
+public class LedgerMenuServices {
 
     //Purpose: Handles filtering and reporting logic
     //Contains:
@@ -32,7 +32,7 @@ public class ReportService {
             }
         }
         // Export selected filtered list of transactions to a new CSV file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("DepositReport.csv", false))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("DepositReport.csv", true))) {
             for (Transaction t : DepositsOnly) {
                 writer.write(t.toCSV()); // Assumes Transaction has a toCsv() method
                 writer.newLine();        // Move to the next line
@@ -53,7 +53,7 @@ public class ReportService {
             }
         }
         // Export selected filtered list of transactions to a new CSV file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("PaymentsReport.csv", false))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("PaymentsReport.csv", true))) {
             for (Transaction t :PaymentsOnly) {
                 writer.write(t.toCSV()); // Assumes Transaction has a toCsv() method
                 writer.newLine();        // Move to the next line
@@ -79,7 +79,7 @@ public class ReportService {
                 MonthToDate.add(t);      // used diff letter 'm' because using 't' was giving an error
             }}
             // Export selected filtered list of transactions to a new CSV file
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("MonthToDateReport.csv", false))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("MonthToDateReport.csv", true))) {
                 for (Transaction t : MonthToDate) {
                     writer.write(t.toCSV()); // Assumes Transaction has a toCsv() method
                     writer.newLine();        // Move to the next line
