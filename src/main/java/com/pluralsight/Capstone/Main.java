@@ -11,7 +11,11 @@ public class Main {
 
     public static void main(String[] args) {
         int hour = LocalTime.now().getHour();
+
         String greeting;
+
+        System.out.println("Please enter your name?");
+        String name = Myscanner.nextLine();
 
         if (hour >= 5 && hour < 12) {
             greeting = "Good morning ☕🌄";
@@ -22,7 +26,7 @@ public class Main {
         } else {
             greeting = "Good night 🌙";
         }
-        System.out.println(greeting);
+        System.out.println(greeting + " " + name);
 
         //loop that keeps the app running until the user chooses “X”
         //Handle user input with a switch block. Using while to make a loop.
