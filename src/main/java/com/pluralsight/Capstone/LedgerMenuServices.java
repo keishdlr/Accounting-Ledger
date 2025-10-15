@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class LedgerMenuServices {
@@ -17,6 +18,7 @@ public class LedgerMenuServices {
     //- reportMonthToDate(List<Transaction>)
     // Display all transactions
     public static void displayAllTransactions(List<Transaction> transactions) {
+        transactions.sort(Comparator.comparing(Transaction::getDate).reversed()); // sort by newest first
         for (Transaction t : transactions) {
             System.out.println(t.toCSV());
         }
@@ -27,11 +29,12 @@ public class LedgerMenuServices {
         List<Transaction> DepositsOnly = new ArrayList<>(); //array that collects all the deposits
         for (Transaction t : transactions) {
             if (t.isDeposit()) {
-                System.out.println(t.toCSV());
+                System.out.println(t.toCSV()); // Displays only deposits
                 DepositsOnly.add(t);    // adds new transactions to the custom report file called DepositReport
             }
         }
         // Export selected filtered list of transactions to a new CSV file
+        DepositsOnly.sort(Comparator.comparing(Transaction::getDate).reversed()); //sort by newest first
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("DepositReport.csv", true))) {
             for (Transaction t : DepositsOnly) {
                 writer.write(t.toCSV()); // Assumes Transaction has a toCsv() method
@@ -48,10 +51,11 @@ public class LedgerMenuServices {
         List <Transaction> PaymentsOnly = new ArrayList<>(); // array that collects all the payments
         for (Transaction t : transactions) {
             if (t.isPayment()) {
-                System.out.println(t.toCSV());
+                System.out.println(t.toCSV()); //Displays only payments
                 PaymentsOnly.add(t); // adds to the PaymentReport
             }
         }
+        PaymentsOnly.sort(Comparator.comparing(Transaction::getDate).reversed()); // sorting
         // Export selected filtered list of transactions to a new CSV file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("PaymentsReport.csv", true))) {
             for (Transaction t :PaymentsOnly) {
@@ -65,29 +69,30 @@ public class LedgerMenuServices {
     }
 
     // Display transactions from the current month
-    public static void reportMonthToDate(List<Transaction> transactions) {
-        List<Transaction> MonthToDate = new ArrayList<>();
-        //Get today's date
-        LocalDate now = LocalDate.now();
-        // for loop to go through each transaction in the list
-        for (Transaction t : transactions) {
-            //nested if statement to check if the month and year is the same as today
-            if (t.getDate().getMonth() == now.getMonth() &&
-                    t.getDate().getYear() == now.getYear()) {
-                // print the transaction that matches the year and month
-                System.out.println(t.toCSV());
-                MonthToDate.add(t);
-            }}
-            // Export selected filtered list of transactions to a new CSV file
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("MonthToDateReport.csv", true))) {
-                for (Transaction t : MonthToDate) {
-                    writer.write(t.toCSV());
-                    writer.newLine();        // Move to the next line
-                }
-            } catch (IOException e) {
-                //Print error message if writing fails
-                System.err.println("Error saving transaction: " + e.getMessage());
-            }
-    }
+//    public static void reportMonthToDate(List<Transaction> transactions) {
+//        List<Transaction> MonthToDate = new ArrayList<>();
+//        //Get today's date
+//        LocalDate now = LocalDate.now();
+//        // for loop to go through each transaction in the list
+//        for (Transaction t : transactions) {
+//            //nested if statement to check if the month and year is the same as today
+//            if (t.getDate().getMonth() == now.getMonth() &&
+//                    t.getDate().getYear() == now.getYear()) {
+//                // print the transaction that matches the year and month
+//                System.out.println(t.toCSV());
+//                MonthToDate.add(t);
+//            }}
+//        MonthToDate.sort(Comparator.comparing(Transaction::getDate).reversed());
+//        // Export selected filtered list of transactions to a new CSV file
+//            try (BufferedWriter writer = new BufferedWriter(new FileWriter("MonthToDateReport.csv", true))) {
+//                for (Transaction t : MonthToDate) {
+//                    writer.write(t.toCSV());
+//                    writer.newLine();        // Move to the next line
+//                }
+//            } catch (IOException e) {
+//                //Print error message if writing fails
+//                System.err.println("Error saving transaction: " + e.getMessage());
+//            }
+//    }
 }
 

@@ -2,6 +2,7 @@ package com.pluralsight.Capstone;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -80,15 +81,15 @@ public class Main {
             List<Transaction> transactions = TransactionService.loadTransactions();
             switch (entry) {
                 case "A":
-                    AllEntriesDisplay();  // if A is selected then it will display all the entries
+                    // if A is selected then it will display all the entries
                     LedgerMenuServices.displayAllTransactions(transactions);
                     break;
                 case "D":
-                    DisplayDeposits();    // if D is selected then it will display all the deposits
+                    // if D is selected then it will display all the deposits
                     LedgerMenuServices.displayDeposits(transactions);
                     break;
                 case "P":
-                    DisplayPayments();    // if P is selected then it will display all the payments
+                    // if P is selected then it will display all the payments
                     LedgerMenuServices.displayPayments(transactions);
                     break;
                 case "R":
@@ -99,31 +100,6 @@ public class Main {
                 default:
                     System.out.println("Invalid input. Try again");
             }
-        }
-    }
-
-    private static void DisplayPayments() {
-        List<Transaction> transactions = TransactionService.loadTransactions();//payments();
-        for (Transaction t : transactions) {
-            if (t.isPayment()) { // prints only transactions with negative values
-                System.out.println(t.toCSV());
-            }
-        }
-    }
-
-    private static void DisplayDeposits() {
-        List<Transaction> transactions = TransactionService.loadTransactions();//deposits();
-        for (Transaction t : transactions) {
-            if (t.isDeposit()) { // Prints only transactions with positive values
-                System.out.println(t.toCSV());
-            }
-        }
-    }
-
-    private static void AllEntriesDisplay() {
-        List<Transaction> transactions = TransactionService.loadTransactions();//allEntries();
-        for (Transaction t : transactions) {
-            System.out.println(t.toCSV());
         }
     }
 
@@ -158,7 +134,7 @@ public class Main {
                     ReportMenuServices.reportYearToDate(transactions);     // year to date method
                     break;
                 case "V":
-                    System.out.println(" What is the vendor Name?");       // search by vendor
+                    System.out.println(" What is the vendor name?");       // search by vendor
                     String vendorName = Myscanner.nextLine().trim();
                     ReportMenuServices.reportByVendor(transactions, vendorName);
                     break;
