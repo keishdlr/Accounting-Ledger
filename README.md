@@ -10,6 +10,7 @@ Each class in this project has a clear and focused responsibility:
 
 ### `Main.java`
 Handles **user interaction** and **menu logic**.
+- Customized greeting with name and time of day
 - Displays CLI options
 - Routes user input to the appropriate service or feature
 
@@ -27,5 +28,11 @@ Manages **file handling** for transactions.
 ### `ReportService.java` and `LedgerReports.java`
 Provides **filtering and reporting logic**.
 - Generates summaries or filtered views (e.g., by vendor or date)
+
+### `Images`
+![Description of image](Images/Home Screen and greeting.png)
+![Description of image](Images/Ledger Menu.png)
+![Description of image](Images/Reports Menu.png)
+![Description of image](Images/CSV files.png)
 
 ---
