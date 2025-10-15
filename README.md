@@ -11,14 +11,14 @@ Each class in this project has a clear and focused responsibility:
 ### `Main.java`
 Handles **user interaction** and **menu logic**.
 - Customized greeting with name and time of day
-- Displays CLI options
-- Routes user input to the appropriate service or feature
+- Displays Menu options
+- Prompts user input to the appropriate service or feature
 
 ### `Transaction.java`
 Defines the **data model** for a transaction.
 - Specifies fields: `date`, `time`, `description`, `vendor`, `amount`
 - Groups related data into a single object
-- Supports CSV formatting via `toCSV()` method
+- CSV formatting via `toCSV()` method
 
 ### `TransactionService.java`
 Manages **file handling** for transactions.
@@ -28,6 +28,7 @@ Manages **file handling** for transactions.
 ### `ReportService.java` and `LedgerReports.java`
 Provides **filtering and reporting logic**.
 - Generates summaries or filtered views (e.g., by vendor or date)
+- Generates new file for filtered views
 
 ### `Images`
 ![<img width="287" height="172" alt="Home Screen and greeting" src="https://github.com/user-attachments/assets/1afb46aa-9ab2-43b7-ad13-59d72617defc" />](Images/Home Screen and greeting.png)
