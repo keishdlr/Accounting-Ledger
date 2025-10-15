@@ -27,6 +27,9 @@ public class Main {
         }
         System.out.println(greeting + " " + name);
 
+        HomeScreen();
+    }
+    private static void HomeScreen() {
         //loop that keeps the app running until the user chooses “X”
         //Handle user input with a switch block. Using while to make a loop.
         while (true) {
@@ -51,7 +54,6 @@ public class Main {
                     System.out.println("Invalid input. Try again");
             }
         }
-
     }
     //Ledger menu options
     // 1. all entries
@@ -67,7 +69,7 @@ public class Main {
         System.out.println("    D) All deposit entries ");
         System.out.println("    P) All payment entries ");
         System.out.println("    R) Reports             ");
-        System.out.println("    X) Previous Menu       ");
+        System.out.println("    H) Home Screen         ");
 
         String entry = Myscanner.nextLine().toUpperCase();
         List<Transaction> transactions = TransactionService.loadTransactions();
@@ -83,7 +85,7 @@ public class Main {
                     break;
                 case "R":  ReportService();      // if R is selected thn it will open the report menu
                     break;
-                case "X":  return;              // return to previous menu
+                case "H":  HomeScreen();         // return to previous menu
             default:
                     System.out.println("Invalid input. Try again");
             }
@@ -128,7 +130,7 @@ public class Main {
             System.out.println("  P) Previous Month    ");
             System.out.println("  Y) Year To Date      ");
             System.out.println("  V) Search by Vendor  ");
-            System.out.println("  X) Close Program              ");
+            System.out.println("  X) Close Program      ");
 
             String Rselect = Myscanner.nextLine().toUpperCase(); // ignores case when selecting a menu option
             List<Transaction> transactions = TransactionService.loadTransactions();

@@ -76,12 +76,12 @@ public class LedgerMenuServices {
                     t.getDate().getYear() == now.getYear()) {
                 // print the transaction that matches the year and month
                 System.out.println(t.toCSV());
-                MonthToDate.add(t);      // used diff letter 'm' because using 't' was giving an error
+                MonthToDate.add(t);
             }}
             // Export selected filtered list of transactions to a new CSV file
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("MonthToDateReport.csv", true))) {
                 for (Transaction t : MonthToDate) {
-                    writer.write(t.toCSV()); // Assumes Transaction has a toCsv() method
+                    writer.write(t.toCSV());
                     writer.newLine();        // Move to the next line
                 }
             } catch (IOException e) {
