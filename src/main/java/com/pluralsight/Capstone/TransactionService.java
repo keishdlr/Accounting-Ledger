@@ -58,7 +58,5 @@ public class TransactionService {
         //error message when writing fails
         System.err.println("Error saving transaction: " + e.getMessage());
     }}
-
-
 }
 

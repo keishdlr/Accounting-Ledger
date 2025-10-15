@@ -25,10 +25,11 @@ public class Main {
         } else {
             greeting = "Good night 🌙";
         }
-        System.out.println(greeting + " " + name);
+        System.out.println(greeting + " " + name); // greeting concatenated with the name to get a personalized greeting
 
         HomeScreen();
     }
+
     private static void HomeScreen() {
         //loop that keeps the app running until the user chooses “X”
         //Handle user input with a switch block. Using while to make a loop.
@@ -43,13 +44,17 @@ public class Main {
 
             String selection = Myscanner.nextLine().toUpperCase();
             switch (selection) {
-                case "D": addTransaction(true);   // if D is selected then it will run add deposit method
+                case "D":
+                    addTransaction(true);   // if D is selected then it will run add deposit method
                     break;
-                case "P": addTransaction(false);  // if p is selected then it will run make payment method
+                case "P":
+                    addTransaction(false);  // if p is selected then it will run make payment method
                     break;
-                case "L": showLedgerMenu();                // if L is selected then it will run Ledger method and open the ledger screen
+                case "L":
+                    showLedgerMenu();                // if L is selected then it will run Ledger method and open the ledger screen
                     break;
-                case "X": System.exit(0);           // if X is selected then it will exit the program
+                case "X":
+                    System.exit(0);           // if X is selected then it will exit the program
                 default:
                     System.out.println("Invalid input. Try again");
             }
@@ -63,48 +68,56 @@ public class Main {
 
     private static void showLedgerMenu() {
 
-        while (true){
-        System.out.println("---💰---Ledger menu---💰---");
-        System.out.println("    A) All entries         ");
-        System.out.println("    D) All deposit entries ");
-        System.out.println("    P) All payment entries ");
-        System.out.println("    R) Reports             ");
-        System.out.println("    H) Home Screen         ");
+        while (true) {
+            System.out.println("---💰---Ledger menu---💰---");
+            System.out.println("    A) All entries         ");
+            System.out.println("    D) All deposit entries ");
+            System.out.println("    P) All payment entries ");
+            System.out.println("    R) Reports             ");
+            System.out.println("    H) Home Screen         ");
 
-        String entry = Myscanner.nextLine().toUpperCase();
-        List<Transaction> transactions = TransactionService.loadTransactions();
-        switch (entry) {
-                case "A":  AllEntriesDisplay();  // if A is selected then it will display all the entries
-                           LedgerMenuServices.displayAllTransactions(transactions);
+            String entry = Myscanner.nextLine().toUpperCase();
+            List<Transaction> transactions = TransactionService.loadTransactions();
+            switch (entry) {
+                case "A":
+                    AllEntriesDisplay();  // if A is selected then it will display all the entries
+                    LedgerMenuServices.displayAllTransactions(transactions);
                     break;
-                case "D":  DisplayDeposits();    // if D is selected then it will display all the deposits
-                            LedgerMenuServices.displayDeposits(transactions);
+                case "D":
+                    DisplayDeposits();    // if D is selected then it will display all the deposits
+                    LedgerMenuServices.displayDeposits(transactions);
                     break;
-                case "P":  DisplayPayments();    // if P is selected then it will display all the payments
-                            LedgerMenuServices.displayPayments(transactions);
+                case "P":
+                    DisplayPayments();    // if P is selected then it will display all the payments
+                    LedgerMenuServices.displayPayments(transactions);
                     break;
-                case "R":  ReportService();      // if R is selected thn it will open the report menu
+                case "R":
+                    ReportService();      // if R is selected thn it will open the report menu
                     break;
-                case "H":  HomeScreen();         // return to previous menu
-            default:
+                case "H":
+                    HomeScreen();         // return to previous menu
+                default:
                     System.out.println("Invalid input. Try again");
             }
-        }}
+        }
+    }
 
     private static void DisplayPayments() {
-       List<Transaction> transactions = TransactionService.loadTransactions();//payments();
+        List<Transaction> transactions = TransactionService.loadTransactions();//payments();
         for (Transaction t : transactions) {
             if (t.isPayment()) { // prints only transactions with negative values
-            System.out.println(t.toCSV());
-        }}
+                System.out.println(t.toCSV());
+            }
+        }
     }
 
     private static void DisplayDeposits() {
         List<Transaction> transactions = TransactionService.loadTransactions();//deposits();
         for (Transaction t : transactions) {
             if (t.isDeposit()) { // Prints only transactions with positive values
-            System.out.println(t.toCSV());
-        }}
+                System.out.println(t.toCSV());
+            }
+        }
     }
 
     private static void AllEntriesDisplay() {
@@ -130,23 +143,27 @@ public class Main {
             System.out.println("  P) Previous Month    ");
             System.out.println("  Y) Year To Date      ");
             System.out.println("  V) Search by Vendor  ");
-            System.out.println("  X) Close Program      ");
+            System.out.println("  L) Go back to Ledger ");
 
             String Rselect = Myscanner.nextLine().toUpperCase(); // ignores case when selecting a menu option
             List<Transaction> transactions = TransactionService.loadTransactions();
             switch (Rselect) {
-                case "M":    ReportMenuServices.reportMonthToDate(transactions);    // month to date method
+                case "M":
+                    ReportMenuServices.reportMonthToDate(transactions);    // month to date method
                     break;
-                case "P":    ReportMenuServices.reportPreviousMonth(transactions);  // previous month
+                case "P":
+                    ReportMenuServices.reportPreviousMonth(transactions);  // previous month
                     break;
-                case "Y":    ReportMenuServices.reportYearToDate(transactions);     // year to date method
+                case "Y":
+                    ReportMenuServices.reportYearToDate(transactions);     // year to date method
                     break;
-                case "V":    System.out.println(" What is the vendor Name?");  // search by vendor
-                             String vendorName = Myscanner.nextLine().trim();
-                             ReportMenuServices.reportByVendor(transactions, vendorName);
-                             break;
-                case "X":
-                             System.exit(0);                         // if x is selected then program will end
+                case "V":
+                    System.out.println(" What is the vendor Name?");       // search by vendor
+                    String vendorName = Myscanner.nextLine().trim();
+                    ReportMenuServices.reportByVendor(transactions, vendorName);
+                    break;
+                case "L":
+                    showLedgerMenu();                                       // go back to Ledger Screen
                     break;
                 default:
                     System.out.println("Invalid input. Try again");

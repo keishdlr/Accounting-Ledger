@@ -98,6 +98,7 @@ public class Transaction {
     //it's a deposit if the amount is greater than 0
     //credit
     public boolean isDeposit() {
+
         return amount > 0;
     }
 
